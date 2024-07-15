@@ -25,7 +25,7 @@ def sidebar():
         )
 
         st.session_state["OPENAI_API_KEY"] = api_key_input
-        st.markdown("**Flow Autocode Debugger**")
+        # st.markdown("**Flow Autocode Debugger**")
         # image = Image.open('.\\core\\graph_image.png')
         # st.image(image, caption="Flowchart autocode debugger")
         st.markdown("\n\n---")
@@ -39,4 +39,4 @@ def sidebar():
         )
         st.markdown("---")
 
-        faq()
+        # faq()
