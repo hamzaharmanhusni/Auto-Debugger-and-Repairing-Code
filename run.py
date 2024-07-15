@@ -81,21 +81,7 @@ async def main():
         st.warning(
             "Enter your OpenAI API key in the sidebar. You can get a key at"
             " https://platform.openai.com/account/api-keys."
-        )
-
-    # uploaded_file = st.file_uploader(
-    #     "Upload your code",
-    #     # type=["pdf", "docx", "txt"],
-    #     type=["py","java","go", "txt"],
-    #     help="Scanned documents are not supported yet!",
-    # )
-    # if not uploaded_file:
-    #     st.stop()  
-    
-    try:
-        uploaded_file = r"core\test_file\test_file2.py"
-    except Exception as e:
-        st.write("Error is ",e)   
+        )    
     
     model: str = st.selectbox("Model", options=MODEL_LIST)  # type: ignore
     temperature: int = st.number_input("Temperature", value=0.2)
@@ -118,7 +104,16 @@ async def main():
     
     if process_type=="Process Path":
         st.subheader("Input Path")    
-        path_file = st.text_area("Enter the path file", "C:\\Users\\Acer")
+        path_file = st.file_uploader(
+            "Upload your code",
+            # type=["pdf", "docx", "txt"],
+            type=["py","java","go", "txt"],
+            help="Scanned documents are not supported yet!",
+        )
+        if not path_file:
+            st.stop() 
+
+        # path_file = st.text_area("Enter the path file", "C:\\Users\\Acer")
         process = st.button("Process path")
         
         if process:
