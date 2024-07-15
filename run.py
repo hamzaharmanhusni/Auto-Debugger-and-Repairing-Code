@@ -104,26 +104,27 @@ async def main():
     
     if process_type == "Process Path":
         st.subheader("Input Path")    
-        path_file = st.file_uploader(
+        uploaded_file = st.file_uploader(
             "Upload your code",
             type=["py", "java", "go", "txt"],
-            help="Scanned documents are not supported yet!"
+            help="Scanned documents are not supported yet!",
         )
-        
-        if not path_file:
-            st.warning("Please upload a file.")
+
+        if not uploaded_file:
             st.stop()
 
         process = st.button("Process path")
-        
+
         if process:
-            if path_file is not None:
-                file_name = path_file.name
-                with open(file_name, 'r') as file:
-                    code = file.read()
-            
-                code = f"Sources: {file_name}\n\n**Code**:\n```python\n{code}\n```"
-                
+            try:
+                with uploaded_file:
+                    code = uploaded_file.read().decode('utf-8')
+                    file_name = uploaded_file.name
+            except AttributeError:
+                st.error("File not uploaded or invalid file type selected.")
+            except UnicodeDecodeError:
+                st.error("Unable to decode the file as UTF-8.")
+            code = f"Sources: {file_name}\n\n**Code**:\n```python\n{code}\n```"
                 # st.markdown(code)
             
             running_dict = {}
