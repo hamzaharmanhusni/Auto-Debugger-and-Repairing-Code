@@ -118,7 +118,7 @@ async def main():
         
         if process:
 
-            with open(path_file, 'r') as file:
+            with open(path_file, 'r',encoding='utf-8') as file:
                 code = file.read()
             code = f"\n\n**Code** :\n```python\n{code}\n```"
             
