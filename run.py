@@ -102,25 +102,28 @@ async def main():
     requirement = st.text_input("Requirement", "some_requirement")
     process_type: str = st.selectbox("Process :", options=["Process Path", "Process the code"])
     
-    if process_type=="Process Path":
+    if process_type == "Process Path":
         st.subheader("Input Path")    
-        path_file = st.file_uploader(
+        uploaded_file = st.file_uploader(
             "Upload your code",
-            # type=["pdf", "docx", "txt"],
-            type=["py","java","go", "txt"],
+            type=["py", "java", "go", "txt"],
             help="Scanned documents are not supported yet!",
         )
-        if not path_file:
-            st.stop() 
 
-        # path_file = st.text_area("Enter the path file", "C:\\Users\\Acer")
+        if not uploaded_file:
+            st.stop()
+
         process = st.button("Process path")
-        
-        if process:
 
-            with open(path_file, 'r',encoding='utf-8') as file:
-                code = file.read()
-            code = f"\n\n**Code** :\n```python\n{code}\n```"
+        if process:
+            try:
+                with uploaded_file:
+                    code = uploaded_file.read().decode('utf-8')
+                    st.markdown(f"**Code**:\n```{uploaded_file.type}```\n{code}")
+            except AttributeError:
+                st.error("File not uploaded or invalid file type selected.")
+            except UnicodeDecodeError:
+                st.error("Unable to decode the file as UTF-8.")
             
             running_dict = {}
             tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["All", "Code", "Localizer", "Explanation", "Repairer", "Crafter", "Developer", "Price Analysis"])
