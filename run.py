@@ -118,8 +118,8 @@ async def main():
         
         if process:
 
-            with open(path_file, 'r') as rp:
-                code = rp.read()
+            with open(path_file.name, 'r') as file:
+                code = file.read()
             code = f"Sources : {path_file}\n\n**Code** :\n```python\n{code}\n```"
             
             running_dict = {}
