@@ -118,9 +118,9 @@ async def main():
         
         if process:
 
-            with open(path_file.name, 'r') as file:
+            with open(path_file, 'r') as file:
                 code = file.read()
-            code = f"Sources : {path_file.name}\n\n**Code** :\n```python\n{code}\n```"
+            code = f"\n\n**Code** :\n```python\n{code}\n```"
             
             running_dict = {}
             tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["All", "Code", "Localizer", "Explanation", "Repairer", "Crafter", "Developer", "Price Analysis"])
