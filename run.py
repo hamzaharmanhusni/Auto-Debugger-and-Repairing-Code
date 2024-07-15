@@ -118,7 +118,7 @@ async def main():
         
         if process:
 
-            with open(path_file, 'r') as file:
+            with open(path_file.name, 'r') as file:
                 code = file.read()
             code = f"Sources : {path_file.name}\n\n**Code** :\n```python\n{code}\n```"
             
