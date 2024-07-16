@@ -15,7 +15,7 @@ def sidebar():
             "2. Upload path file or type the code📄\n"
             "3. Ask requirement to application💬\n"
         )
-        api_key_input = st.secret["OPENAI_API_KEY"]
+        api_key_input = st.secrets["OPENAI_API_KEY"]
         # api_key_input = st.text_input(
         #     "OpenAI API Key",
         #     type="password",
